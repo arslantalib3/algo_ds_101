@@ -1,0 +1,53 @@
+// Student ID: 180201301
+#include <iostream>
+#include<stdlib.h>
+#include<time.h>
+using namespace std;
+
+void genRandNum(int *array)
+{
+ cout<<" Random Numbers are: ";
+ srand(time(NULL));
+ for(int i=0; i<5; i++)
+ {  
+  int x=rand()%100+1;
+  array [i]=x;
+  cout<<x<<"  ";
+     
+ }
+ 
+}
+void swapValue(int array[],int num1,int num2)
+{
+ int swap=array[num1];
+ array [num1]=array [num2];
+ array[num2]=swap;
+}
+
+void findMinNum(int array [],int size)
+{
+  for(int i=0;i<size-1;i++)
+ {
+   for(int j=0;j<size-i-1;j++)
+  {
+    if(array [j]>array [j+1])
+   {
+     swapValue(array, j,j+1);
+   }
+  }
+ }
+}
+main()
+{
+ int array [5];
+    genRandNum(array);
+ findMinNum(array,5);
+ cout<<endl;
+ cout<<"Sorted Random Numbers are: ";
+ for(int i=0; i<5;i++)
+  {
+   cout<<array [i]<<"  ";
+  }
+
+ system("pause");
+}
