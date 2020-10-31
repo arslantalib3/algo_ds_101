@@ -1,0 +1,123 @@
+#include <iostream>
+#include <ctime> // For time()
+#include <cstdlib> // For srand() and rand() 
+#include <iomanip>
+#include <algorithm>
+
+using namespace std;
+int table[10][10] = {0,0};
+const int row=10;
+const int column=10;
+const int flag = 0;
+void poulateArray(){
+srand(time(0)); // Initialize random number generator.
+
+
+for(int r=0; r<row; r++)//row 
+{
+for(int c=0; c<column; c++)
+{
+table [r][c] = (rand()%100) + 1;
+}
+} 
+cout  "Array is poulated"  endl;
+};
+void showElements (){
+
+if(table[flag][flag] == 0){
+cout  "Array is empty , first poulate it by pressing 1"  endl;
+}
+else
+{ 
+for(int r=0; r<row; r++)//row 
+{
+for(int c=0; c<column; c++)
+{
+cout  table [r][c]  "\t";
+}
+cout  endl;
+}
+}
+
+
+};
+void showLargestElement (){
+int temp;
+int max = 0;
+int indexRow;
+int indexColumn;
+if(table[flag][flag] == 0){
+cout  "Array is empty , first poulate it by pressing 1"  endl;
+}else{
+
+for(int r=0; r<row; r++)//row 
+{
+for(int c=0; c<column; c++)
+{
+temp = table[r][c];
+if(max <= temp){
+max = temp;
+indexRow = r+1;
+indexColumn = c+1;
+}
+}//second
+}//first loop
+cout  "the max value is" max  " which is on Row"  indexRow  " and cloumn"  indexColumn  endl;
+}
+};
+void transposeArray (){
+int copyArray[10][10];
+if(table[flag][flag] == 0){
+cout  "Array is empty , first poulate it by pressing 1";
+}else{
+
+for(int r=0; r<row; r++)//row 
+{
+for(int c=0; c<column; c++)
+{
+copyArray[c][r]= table[r][c];
+
+}//second
+}//first loop
+
+for(int r=0; r<row; r++)//row 
+{
+for(int c=0; c<column; c++)
+{
+cout  copyArray [r][c]  "\t";
+}
+cout  endl;
+
+}
+}
+};
+
+int main()
+{ 
+int choice;
+bool isTrue = true;
+while(isTrue)
+{
+cout  "1.Press 1 to populate a two-dimensional array with integers from 1 to 100."  endl;
+cout  "2.Press 2 to display the array elements."  endl;
+cout  "3.Press 3 to display the largest element present in the array along with its row and column index."  endl;
+cout  "4.Press 4 to find and show the transpose of the array."  endl;
+cout  "Please select an option , use number from 1 to 5 ";
+cin >> choice;
+cout  "--------------------------------------------------------"  endl;
+switch(choice){
+case 1 : poulateArray();
+break;
+case 2 : showElements();
+break;
+case 3 : showLargestElement();
+break;
+case 4 : transposeArray();
+break;
+default : isTrue = false;
+break;
+}
+}
+
+return 0;
+}
