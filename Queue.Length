@@ -1,0 +1,166 @@
+#include<iostream>
+
+using namespace std;
+
+	struct node{
+		node *left;
+		node *right;
+		int data;
+	};
+	
+		class TNode{
+			
+			private:
+					node* root;
+			public:				
+					TNode();
+					int isEmpty();
+					void buildTree(int item);
+					void insert(int item,node *,node *);						
+					void minNode(node*);
+					void maxNode(node*); 
+					int countNodes(node*);
+					int treeHeight(node*);
+					void displayBinTree();
+		};
+		
+		TNode::TNode(){
+			
+				root = NULL;
+			}
+			
+		int TNode::isEmpty() {
+					
+				return (root == NULL);
+			}
+		
+		void TNode::buildTree(int item){
+		
+			node *p = new node;
+			node *parent;
+			
+			cout <<"Insert node in BST :" << item <<endl;
+			insert(item,p,parent);
+		}	
+	
+		void TNode::insert(int item,node * p,node * parent){
+	
+				p->data=item;
+				p->left=NULL;
+				p->right=NULL;
+				parent=NULL;
+				
+				if(isEmpty()){
+					root = p;
+				}					
+				else{
+					
+					node *ptr;
+					ptr = root;
+					
+					while(ptr != NULL){
+						parent = ptr;
+						if(item > ptr->data){
+							ptr = ptr->right;	
+						}							
+						else{
+							ptr = ptr->left;
+						}
+							
+					}	
+					if(item < parent->data){
+						parent->left = p;
+					}						
+					else{
+						parent->right = p;	
+					}
+						
+				}
+	}		
+		
+	void TNode::minNode(node* p){   
+
+	    while (p->left != NULL){
+	
+	        p = p->left;
+	    }
+		cout << "Minimum value : " << p->data <<endl;
+	}
+	
+	void TNode::maxNode(node* p){   
+
+	    while (p->right != NULL){
+	
+	        p = p->right;
+	    }
+		cout << "Maximum value : " << p->data <<endl;
+	}
+	
+	int TNode::countNodes(node* p){
+		
+		int node =  1;             //Node itself should be counted
+	    if (p == NULL){
+	    	
+	    	return 0;
+		}        
+	    else{
+	    	
+	        node += countNodes(p->left);
+	        node += countNodes(p->right);
+	        return node;
+	    }
+	}
+	
+	int TNode::treeHeight(node* p){		
+		
+	    if (p == NULL) 
+		{
+			return 0;	
+		} 	          
+	    else
+	    {  
+	        
+	        int left_side = treeHeight(p->left);  
+	        int right_side = treeHeight(p->right);  
+	      
+	        
+	        if (left_side > right_side)
+			{
+				return(left_side + 1);	
+			} 	              
+	        else 
+			{
+				return(right_side + 1); 	
+			} 
+	    }  
+	    
+	}
+	
+	void TNode::displayBinTree(){
+		cout <<endl<<endl;		
+		minNode(root);
+		maxNode(root);
+		cout <<"Height of BST : "<<treeHeight(root);
+		cout <<"\nTotal nodes : "<<countNodes(root);
+		
+	}
+
+	int main(){
+		
+		TNode b;
+	
+		int data[] = {7,2,9,1,5,14};
+		
+		cout <<"Constructing Binary Search Tree by Inserting Nodes One by One "<<endl;
+		cout <<"------------------------------------------------------------- "<<endl;
+		int arrSize = sizeof(data)/sizeof(data[0]);
+		
+		for(int i = 0; i < arrSize; i++)
+		{
+			b.buildTree(data[i]);
+		}
+		
+		
+		b.displayBinTree();	
+		
+	}
