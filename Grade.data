@@ -1,0 +1,98 @@
+#include <iostream>
+#include <iomanip>
+#include <stdlib.h>
+using namespace std;
+int selectGrade(){
+ int grade = 0;
+ 
+ cout"1 : First Grade\n";
+ cout"2 : Second Grade\n";
+ cout"3 : Third Grade\n";
+ cout"4 : Fourth Grade\n";
+ cout"5 : Fifth Grade\n"; 
+ 
+ cout"\nPlease select grade, use numbers 1 to 5: ";
+ 
+ do {
+  cin>>grade;
+  if(grade >= 1 && grade <= 5){
+   break;
+  }
+  else {
+   cout"\nGrade must be between 1 and 5\n";
+   cout"Invalid choice, please select correct grade: ";
+  }
+ } while(true);
+ return grade; 
+}
+void createQuestions(int l, int u, int q){
+ 
+ int firstNum = 0, secondNum = 0;
+ 
+ for(int i = 1; i <= q; i++){
+  
+  firstNum = l + (rand() % (u - l + 1));
+  secondNum = l + (rand() % (u - l + 1));
+   
+  coutsetw(2)i".";
+  
+  if(rand() % 2 == 0){
+   cout"  ("firstNum" + "secondNum") = ______\t\t";;
+  }
+  else{
+   if(firstNum > secondNum) {
+    cout"  ("firstNum" - "secondNum") = ______\t\t";
+   }
+   else{
+    cout"  ("secondNum" - "firstNum") = ______\t\t";
+   }   
+  }
+  
+  if(i % 3 == 0){
+   cout"\n";
+  }
+ } 
+}
+void generatePaper(int grade, int questions) {
+ 
+ int lowerLimit, Upperlimit;
+ 
+ if(grade == 1){
+  lowerLimit = 10;
+  Upperlimit = 99;
+  createQuestions(lowerLimit, Upperlimit, questions);
+ }
+ else if(grade == 2){
+  lowerLimit = 100;
+  Upperlimit = 999;
+  createQuestions(lowerLimit, Upperlimit, questions);
+ }
+ else if(grade == 3){
+  lowerLimit = 1000;
+  Upperlimit = 9999;
+  createQuestions(lowerLimit, Upperlimit, questions);
+ }
+ else if(grade == 4){
+  lowerLimit = 10000;
+  Upperlimit = 99999;
+  createQuestions(lowerLimit, Upperlimit, questions);
+ }
+ else if(grade == 5){
+  lowerLimit = 100000;
+  Upperlimit = 999909;
+  createQuestions(lowerLimit, Upperlimit, questions);
+ }
+}
+main(){
+ 
+ int grade = 0, numQuestions = 0;
+ grade = selectGrade();
+ 
+ cout"Enter number of questions you want to generate: ";
+ cin>>numQuestions;
+ 
+ coutendl;
+ generatePaper(grade, numQuestions); 
+ coutendl;
+ system("pause");
+}
